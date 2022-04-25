@@ -7,6 +7,7 @@ from .models import Choice, Question
 from django.template import loader
 from django.http import Http404
 import requests
+from .forms import NameForm
 
 def index(request, url_simulation):
     url = "https://mes-aides.1jeune1solution.beta.gouv.fr/api/simulation/via/"+ str(url_simulation)
@@ -26,30 +27,6 @@ def index(request, url_simulation):
                     aides_eligible.append(key)
     return render(request,'polls/index.html',{'content' : content, 'content_individus_demandeur' : content_key, 'aides_eligible' : aides_eligible })
 
-def index1(request):
-    url = "https://mes-aides.1jeune1solution.beta.gouv.fr/api/simulation/via/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNjAzZjlmN2YyM2JhNzgwMGQwOTU5YyIsInNjb3BlIjoiY2Nhc19zYWludF9sb3Vpc19wcmVwcm9kIiwiZXhwIjoxNjUwNDc4NTM1LCJpYXQiOjE2NTA0NzQ5MzV9.oMBjLjrcTLvdhNWYxQjb33jVOkE5oMdFhfX0Wkx6C-w"
-    response = requests.get(url, params= "id=openfisca" )
-    content=response.json()
-    url2 = 'https://mes-aides.org/api/benefits'
-    content2 = requests.get(url2).json() #content est une liste de dictionnaire (chacun correspond à une aide)
-    liste_aide=[]
-    liste_eligibilite = []
-    for aide in content2 :
-        if aide['source']=='openfisca':
-            liste_aide.append(aide['id'])
-
-    for cle in content:
-        for key in content[cle]:
-            for item in content[cle][key]:
-                x=content[cle][key][item]
-                
-                liste_cle  = []
-                for val in x : 
-                    liste_cle.append(val)
-                if '2022-04' in liste_cle : 
-                        if (x['2022-04'] == True or x['2022-04'] == 1) and item in liste_aide:
-                            liste_eligibilite.append(item)
-    return render(request,'polls/index1.html',{ 'liste_eligibilite' : liste_eligibilite })
 '''
 def index(request):
     latest_question_list = Question.objects.order_by('-pub_date')[:5]

@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'myform.apps.MyformConfig',
 ]
 
 MIDDLEWARE = [
@@ -55,7 +56,7 @@ ROOT_URLCONF = 'mysite.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['/Users/archibaldroulier/Documents/projetS7/mysite/polls/templates/polls', '/Users/archibaldroulier/Documents/projetS7/mysite/myform/templates/myform'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
