@@ -18,7 +18,7 @@ from django.urls import include, path
 
 urlpatterns = [
     path('admin/', admin.site.urls),   #ce sont les root url, tjrs utiliser "include" pour faire appels au path des autres apps
-    path('polls/', include('polls.urls')),
+    path('simulation/', include('polls.urls')),
 ]
 
 

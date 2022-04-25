@@ -8,9 +8,9 @@ from django.template import loader
 from django.http import Http404
 import requests
 
-def index(request):
-    url = "https://mes-aides.1jeune1solution.beta.gouv.fr/api/simulation/via/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNjAxOWJlN2YyM2JhNzgwMGQwNDAwNCIsInNjb3BlIjoiY2Nhc19zYWludF9sb3Vpc19wcmVwcm9kIiwiZXhwIjoxNjUwNDY4ODI1LCJpYXQiOjE2NTA0NjUyMjV9._naULQ2aeQD5QfdXXiaNPOAPIKU4qQNIG4SJKFWTrk4"
-    response = requests.get(url, params= "id=openfisca" )
+def index(request, url_simulation):
+    url = "https://mes-aides.1jeune1solution.beta.gouv.fr/api/simulation/via/"+ str(url_simulation)
+    response = requests.get(url)
     content=response.json()
     aides_eligible = []
     for cle in content :    
