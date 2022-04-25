@@ -27,7 +27,7 @@ def index(request):
     return render(request,'polls/index.html',{'content' : content, 'content_individus_demandeur' : content_key, 'aides_eligible' : aides_eligible })
 
 def index1(request):
-    url = "https://mes-aides.1jeune1solution.beta.gouv.fr/api/simulation/via/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNjAxOWJlN2YyM2JhNzgwMGQwNDAwNCIsInNjb3BlIjoiY2Nhc19zYWludF9sb3Vpc19wcmVwcm9kIiwiZXhwIjoxNjUwNDY4ODI1LCJpYXQiOjE2NTA0NjUyMjV9._naULQ2aeQD5QfdXXiaNPOAPIKU4qQNIG4SJKFWTrk4"
+    url = "https://mes-aides.1jeune1solution.beta.gouv.fr/api/simulation/via/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNjAzZjlmN2YyM2JhNzgwMGQwOTU5YyIsInNjb3BlIjoiY2Nhc19zYWludF9sb3Vpc19wcmVwcm9kIiwiZXhwIjoxNjUwNDc4NTM1LCJpYXQiOjE2NTA0NzQ5MzV9.oMBjLjrcTLvdhNWYxQjb33jVOkE5oMdFhfX0Wkx6C-w"
     response = requests.get(url, params= "id=openfisca" )
     content=response.json()
     url2 = 'https://mes-aides.org/api/benefits'
