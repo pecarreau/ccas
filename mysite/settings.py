@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'myform.apps.MyformConfig',
+    'crispy_forms'
 ]
 
 MIDDLEWARE = [
@@ -56,7 +57,7 @@ ROOT_URLCONF = 'mysite.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['/Users/archibaldroulier/Documents/projetS7/mysite/polls/templates/polls', '/Users/archibaldroulier/Documents/projetS7/mysite/myform/templates/myform'],
+        'DIRS': ['/Users/archibaldroulier/Desktop/Documents/projetS7/mysite/polls/templates/polls', '/Users/archibaldroulier/Desktop/Documents/projetS7/mysite/myform/templates/myform'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

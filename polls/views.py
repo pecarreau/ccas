@@ -1,12 +1,14 @@
+from pyexpat.errors import messages
 from django.shortcuts import get_object_or_404, render
 
 # Create your views here.
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
-from .models import Choice, Question
 from django.template import loader
 from django.http import Http404
 import requests
+from django import forms
+
 from .forms import NameForm
 
 def index(request, url_simulation):
@@ -44,7 +46,7 @@ def index(request):
 def detail(request, question_id):
     return HttpResponse("You're looking at question %s." % question_id)
 '''
-
+'''
 def detail(request, question_id):
     try:
         question = Question.objects.get(pk=question_id)
@@ -73,3 +75,5 @@ def vote(request, question_id):
         # with POST data. This prevents data from being posted twice if a
         # user hits the Back button.
         return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))
+'''
+
