@@ -31,7 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'polls.apps.PollsConfig', #important de rajouter cette ligne 
+    'polls.apps.PollsConfig',  # important de rajouter cette ligne
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -57,7 +57,7 @@ ROOT_URLCONF = 'mysite.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['/Users/archibaldroulier/Desktop/Documents/projetS7/mysite/polls/templates/polls', '/Users/archibaldroulier/Desktop/Documents/projetS7/mysite/myform/templates/myform'],
+        'DIRS': ['/Users/pecar/OneDrive/Documents/ccas/myform/templates/myform', '/Users/pecar/OneDrive/Documents/ccas/polls/templates/myform'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

@@ -11,23 +11,34 @@ from django import forms
 
 from .forms import NameForm
 
+
 def index(request, url_simulation):
-    url = "https://mes-aides.1jeune1solution.beta.gouv.fr/api/simulation/via/"+ str(url_simulation)
+    urlbenef = "https://mes-aides.1jeune1solution.beta.gouv.fr/api/benefits"
+    benefresponse = requests.get(urlbenef)
+    benef = benefresponse.json()
+    openfisca_benefits = []
+    for data in benef:
+        if data["source"] == 'openfisca':
+            openfisca_benefits.append(data["id"])
+    url = "https://mes-aides.1jeune1solution.beta.gouv.fr/api/simulation/via/" + \
+        str(url_simulation)
     response = requests.get(url)
-    content=response.json()
+    content = response.json()
     aides_eligible = []
-    for cle in content :    
-        content_key= content[cle]
-        for item in content_key :
+    for cle in content:
+        content_key = content[cle]
+        for item in content_key:
             key_aides = []
             content_key_item = content_key[item]
-            for key in content_key_item : 
-                if 'aide' in key or 'gratuite' in key or 'eligibilite' in key or 'bourse' in key or 'carte' in key:
-                    key_aides.append(key)  
-            for key in key_aides : 
-                if content_key_item[key]['2022-04'] == 1 or content_key_item[key]['2022-04'] == True : 
+            for key in content_key_item:
+                if key in openfisca_benefits:
+                    key_aides.append(key)
+            for key in key_aides:
+                lastsim = list(content_key_item[key].keys())[-1]
+                if content_key_item[key][lastsim] == True or content_key_item[key][lastsim] > 0:
                     aides_eligible.append(key)
-    return render(request,'polls/index.html',{'content' : content, 'content_individus_demandeur' : content_key, 'aides_eligible' : aides_eligible })
+    return render(request, 'polls/index.html', {'content': content, 'content_individus_demandeur': content_key, 'aides_eligible': aides_eligible})
+
 
 '''
 def index(request):
@@ -76,4 +87,3 @@ def vote(request, question_id):
         # user hits the Back button.
         return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))
 '''
-

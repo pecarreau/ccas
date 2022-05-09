@@ -1,10 +1,7 @@
 # Create your views here.
-from re import X
-from xxlimited import Xxo
 from django.contrib import messages
 from django import forms
 from django.shortcuts import render
-from django.forms import ModelForm
 from .models import Droit, Personne
 
 
@@ -41,6 +38,7 @@ class CommentForm(forms.Form):
     comment = forms.CharField(widget=forms.Textarea)
 '''
 
+
 class PersonneForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(PersonneForm, self).__init__(*args, **kwargs)
@@ -64,13 +62,14 @@ def CreatePersonne(request):
         if form.is_valid():
             new_personne = form.save()
             # on prépare un nouveau message
-            messages.success(request,new_personne.nom)
+            messages.success(request, new_personne.nom)
             # return redirect(reverse('detail', args=[new_contact.pk] ))
             context = {'personne': new_personne}
             return render(request, 'thanks.html', context)
     # Si méthode GET, on présente le formulaire
     context = {'form': form}
     return render(request, 'nouvellepersonne.html', context)
+
 
 class DroitForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
@@ -95,7 +94,7 @@ def CreateDroit(request):
         if form.is_valid():
             new_droit = form.save()
             # on prépare un nouveau message
-            messages.success(request,new_droit.nom)
+            messages.success(request, new_droit.nom)
             # return redirect(reverse('detail', args=[new_contact.pk] ))
             context = {'droit': new_droit}
             return render(request, 'thanks.html', context)
