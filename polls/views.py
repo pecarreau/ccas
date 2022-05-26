@@ -16,10 +16,13 @@ def index(request, url_simulation):
     urlbenef = "https://mes-aides.1jeune1solution.beta.gouv.fr/api/benefits"
     benefresponse = requests.get(urlbenef)
     benef = benefresponse.json()
+    benefopen = []
     openfisca_benefits = []
     for data in benef:
         if data["source"] == 'openfisca':
-            openfisca_benefits.append(data["id"])
+            benefopen.append(data)
+            openfisca_benefits.append(data["slug"])
+
     url = "https://mes-aides.1jeune1solution.beta.gouv.fr/api/simulation/via/" + \
         str(url_simulation)
     response = requests.get(url)
@@ -37,6 +40,13 @@ def index(request, url_simulation):
                 lastsim = list(content_key_item[key].keys())[-1]
                 if content_key_item[key][lastsim] == True or content_key_item[key][lastsim] > 0:
                     aides_eligible.append(key)
+    aides_eligible = list(set(aides_eligible))
+    aidesnoms = []
+    for aide in aides_eligible:
+        for openfiscs in benefopen:
+            if aide == openfiscs["slug"]:
+                aidesnoms.append(openfiscs["label"])
+    aides_eligible = aidesnoms
     return render(request, 'polls/index.html', {'content': content, 'content_individus_demandeur': content_key, 'aides_eligible': aides_eligible})
 
 
