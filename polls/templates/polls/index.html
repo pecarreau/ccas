@@ -1,9 +1,31 @@
+<!DOCTYPE html>
+<html>
 
-<p><ul> Je suis éligibles aux aides suivantes :  </ul></p>  
-{% for aide in aides_eligible %}
-          
+<head>
+     <meta charset="UTF-8" />
+     <title>CCAS Saint-Louis</title>
+     {% load static %}
+     <link rel="stylesheet" href="{% static 'css/style_ccas.css' %}">
+
+</head>
+
+<body>
+     <header>
+          <nav>
+               <img src="{% static 'Saint-Louis-logo.png' %}" alt="Saint-Louis-logo" class="pictogramme">
+               <h1 class="titre"><a class="titre police">CCAS Saint Louis</a></h1>
+          </nav>
+     </header>
+     <div class="aides">
+          <p>Je suis éligibles aux aides suivantes :</p>
+          {% for aide in aides_eligible %}
+
           <ul>
                <li>{{aide}}</li>
           </ul>
-{% endfor %}
+          {% endfor %}
+     </div>
 
+</body>
+
+</html>

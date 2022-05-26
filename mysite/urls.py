@@ -15,11 +15,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = [
-    path('admin/', admin.site.urls),   #ce sont les root url, tjrs utiliser "include" pour faire appels au path des autres apps
+    # ce sont les root url, tjrs utiliser "include" pour faire appels au path des autres apps
+    path('admin/', admin.site.urls),
     path('simulation/', include('polls.urls')),
-    path('form/',include('myform.urls')),
+    path('form/', include('myform.urls')),
 ]
 
-
+urlpatterns += staticfiles_urlpatterns()
